@@ -27,7 +27,6 @@ public class GeraPdfUserCase {
         this.pdfGateway = pdfGateway;
         this.objectMapper = new ObjectMapper();
     }
-
     public byte[] gerarPdfSimples(FormularioDietaSimple formulario) {
         try {
             String formularioJson = objectMapper.writeValueAsString(formulario);
@@ -39,7 +38,14 @@ public class GeraPdfUserCase {
             PlanoNivelSimplesIaResponse iaResponse =
                     objectMapper.readValue(respostaIaJson, PlanoNivelSimplesIaResponse.class);
 
-            String html = PdfSimplesTemplate.gerarHtml(iaResponse);
+            String nomeUsuario = formulario.getUsuario() != null
+                    ? formulario.getUsuario().getPrimeiro_nome()
+                    : "Usuário";
+
+            String html = PdfSimplesTemplate.gerarHtml(
+                    iaResponse,
+                    nomeUsuario
+            );
 
             return pdfGateway.gerar(html);
 
@@ -47,6 +53,7 @@ public class GeraPdfUserCase {
             throw new RuntimeException("Erro ao gerar PDF simples", e);
         }
     }
+
 
 
     public byte[] gerarPdfMedio(FormularioDietaMedio formulario) {
@@ -65,14 +72,15 @@ public class GeraPdfUserCase {
                     : "Usuário";
 
             double peso = formulario.getDadosFisicos().getPesoAtual();
-            double metaAguaLitros = peso * 0.035; // 50ml por kg
+            double metaAguaLitros = peso * 0.05; // 50ml por kg
 
-            System.out.println("Peso do usuário: ================>>>>>" + peso + " kg");
-            System.out.println("_______________-====> "+  metaAguaLitros + " L");
+            double metaAguaLitrosSemAtividadeFisica = peso * 0.035; // 50ml por kg
+
             String html = PdfMedioTemplate.gerarHtml(
                     iaResponse,
                     nomeUsuario,
-                    metaAguaLitros
+                    metaAguaLitros,
+                    metaAguaLitrosSemAtividadeFisica
             );
 
             return pdfGateway.gerar(html);

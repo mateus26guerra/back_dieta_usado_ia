@@ -5,7 +5,8 @@ import com.mateustech.SistemaDeDietaUsarDoIa.adapter.out.pdf.PdfTextoPadrao;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.IA.model.PlanoNivelSimplesIaResponse;
 public class PdfSimplesTemplate {
 
-    public static String gerarHtml(PlanoNivelSimplesIaResponse ia) {
+    public static String gerarHtml(PlanoNivelSimplesIaResponse ia,
+                                   String nomeUsuario) {
 
         String titulo = "Plano Básico";
         String subtitulo = "Solução simples e acessível para começar";
@@ -56,14 +57,16 @@ public class PdfSimplesTemplate {
     </body>
     </html>
     """.formatted(
-                titulo,
-                subtitulo,
-                descricaoPlano,              // ✅ descrição aparece aqui
-                ia.conteudo.plano_de_dieta_simples,
-                ia.conteudo.cardapio_de_um_dia,
-                ia.conteudo.orientacoes_gerais,
-                PdfTextoPadrao.RODAPE
+                titulo,                                // 1
+                subtitulo,                             // 2
+                descricaoPlano,                        // 3
+                nomeUsuario,                           // 4 ✅
+                ia.conteudo.plano_de_dieta_simples,    // 5
+                ia.conteudo.cardapio_de_um_dia,        // 6
+                ia.conteudo.orientacoes_gerais,        // 7
+                PdfTextoPadrao.RODAPE                  // 8
         );
+
     }
 
 
