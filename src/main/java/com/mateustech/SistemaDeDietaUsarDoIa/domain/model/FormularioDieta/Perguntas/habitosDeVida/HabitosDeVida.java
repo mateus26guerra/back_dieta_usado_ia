@@ -1,20 +1,20 @@
 package com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Perguntas.habitosDeVida;
 
-import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.enumGenerico.NivelTres;
-import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.enumGenerico.Qualidade;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.enumGenerico.NivelTres;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.enumGenerico.Qualidade;
 
-public class habitosDeVida {
+public class HabitosDeVida {
 
     private  int Horas_de_sono;
     private Qualidade qualidade;
     private double consumode_agua_diario;
     private NivelTres nivelDeEstresse;
 
-    public habitosDeVida() {
+    public HabitosDeVida() {
     }
 
 
-    public habitosDeVida(int horas_de_sono, Qualidade qualidade, double consumode_agua_diario, NivelTres nivelDeEstresse) {
+    public HabitosDeVida(int horas_de_sono, Qualidade qualidade, double consumode_agua_diario, NivelTres nivelDeEstresse) {
         Horas_de_sono = horas_de_sono;
         this.qualidade = qualidade;
         this.consumode_agua_diario = consumode_agua_diario;

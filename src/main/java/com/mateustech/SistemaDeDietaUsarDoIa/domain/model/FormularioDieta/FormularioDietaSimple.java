@@ -1,28 +1,31 @@
 package com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta;
 
-import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Perguntas.AtividadeFisica.AtividadeFisica;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Perguntas.DadosFisicos.DadosFisicos;
-import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.Usuario.Usuario;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Perguntas.Objetivo.Objetivo;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Usuario.Usuario;
 
 public class FormularioDietaSimple {
 
 
     private Usuario usuario;
     private DadosFisicos dadosFisicos;
-    private AtividadeFisica atividadeFisica;
+    private Objetivo objetivo;
 
-    public FormularioDietaSimple(Usuario usuario, DadosFisicos dadosFisicos, AtividadeFisica atividadeFisica) {
+    public FormularioDietaSimple() {
+    }
+
+    public FormularioDietaSimple(Usuario usuario, DadosFisicos dadosFisicos, Objetivo objetivo) {
         this.usuario = usuario;
         this.dadosFisicos = dadosFisicos;
-        this.atividadeFisica = atividadeFisica;
+        this.objetivo = objetivo;
     }
 
-    public void setAtividadeFisica(AtividadeFisica atividadeFisica) {
-        this.atividadeFisica = atividadeFisica;
+    public Objetivo getObjetivo() {
+        return objetivo;
     }
 
-    public AtividadeFisica getAtividadeFisica() {
-        return atividadeFisica;
+    public void setObjetivo(Objetivo objetivo) {
+        this.objetivo = objetivo;
     }
 
     public Usuario getUsuario() {

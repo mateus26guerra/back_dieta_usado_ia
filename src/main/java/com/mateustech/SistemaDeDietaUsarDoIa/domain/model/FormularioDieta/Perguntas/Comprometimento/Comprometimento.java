@@ -2,7 +2,7 @@ package com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Pergu
 
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Perguntas.Comprometimento.Cenum.Preferencia_de_dietas;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Perguntas.Comprometimento.Cenum.Preferencia_de_refeicoes;
-import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.enumGenerico.NivelTres;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.enumGenerico.NivelTres;
 
 public class Comprometimento {
     private NivelTres grau_de_comprometimento;
@@ -18,6 +18,10 @@ public class Comprometimento {
         this.preferenciaDedietas = preferenciaDedietas;
         this.orcamentoMensalParaAlimentacao = orcamentoMensalParaAlimentacao;
         this.preferenciaDerefeicoes = preferenciaDerefeicoes;
+    }
+
+    public NivelTres getGrau_de_comprometimento() {
+        return grau_de_comprometimento;
     }
 
     public void setGrau_de_comprometimento(NivelTres grau_de_comprometimento) {

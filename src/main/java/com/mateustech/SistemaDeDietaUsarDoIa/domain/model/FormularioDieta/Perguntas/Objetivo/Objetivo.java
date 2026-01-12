@@ -3,17 +3,17 @@ package com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Pergu
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Perguntas.Objetivo.OBenum.Objetivo_principal;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Perguntas.Objetivo.OBenum.Tipo_de_resultado;
 
-public class Objetovo {
+public class Objetivo {
     private Objetivo_principal objetivo_principal;
     private String Objetivo_secundário;
     private Double KgDesejoPerder;
     private Double kgDesejoGanhar;
     private Tipo_de_resultado tipo_de_resultado;
 
-    public Objetovo() {
+    public Objetivo() {
     }
 
-    public Objetovo(Objetivo_principal objetivo_principal, String objetivo_secundário, Double kgDesejoPerder, Double kgDesejoGanhar, Tipo_de_resultado tipo_de_resultado) {
+    public Objetivo(Objetivo_principal objetivo_principal, String objetivo_secundário, Double kgDesejoPerder, Double kgDesejoGanhar, Tipo_de_resultado tipo_de_resultado) {
         this.objetivo_principal = objetivo_principal;
         Objetivo_secundário = objetivo_secundário;
         KgDesejoPerder = kgDesejoPerder;

@@ -1,9 +1,10 @@
 
 package com.mateustech.SistemaDeDietaUsarDoIa.adapter.in.web.controllers;
 
-import com.mateustech.SistemaDeDietaUsarDoIa.domain.UserCase.GeraPdfSimples.GeraPdfSimplesUserCase;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.usecase.GeraPdfSimples.GeraPdfUserCase;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.FormularioDietaCompleto;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.FormularioDietaMedio;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.FormularioDietaSimple;
-import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.Usuario.Usuario;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,16 +12,41 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class GeraPdfControlle {
 
-    private final GeraPdfSimplesUserCase geraPdfSimplesUserCase;
+    private final GeraPdfUserCase geraPdfUserCase;
 
-    public GeraPdfControlle(GeraPdfSimplesUserCase geraPdfSimplesUserCase) {
-        this.geraPdfSimplesUserCase = geraPdfSimplesUserCase;
+    public GeraPdfControlle(GeraPdfUserCase geraPdfUserCase) {
+        this.geraPdfUserCase = geraPdfUserCase;
     }
 
     @PostMapping("/gerar-pdf-simples")
-    public ResponseEntity<FormularioDietaSimple> gerarPdf(@RequestBody FormularioDietaSimple formularioDietaSimple) {
+    public ResponseEntity<byte[]> gerarPdfSimples
+            (@RequestBody FormularioDietaSimple formulario) {
 
-        FormularioDietaSimple usuarioProcessado = geraPdfSimplesUserCase.gerarPdfSimples(formularioDietaSimple);
+        byte[] pdfBytes = geraPdfUserCase.gerarPdfSimples(formulario);
+
+        return ResponseEntity.ok()
+                .header("Content-Disposition", "attachment; filename=plano-dieta-simples.pdf")
+                .header("Content-Type", "application/pdf")
+                .body(pdfBytes);
+    }
+
+    @PostMapping("/gerar-pdf-medio")
+    public ResponseEntity<byte[]> gerarPdfMedio(
+            @RequestBody FormularioDietaMedio formulario) {
+
+        byte[] pdfBytes = geraPdfUserCase.gerarPdfMedio(formulario);
+
+        return ResponseEntity.ok()
+                .header("Content-Disposition", "attachment; filename=plano-dieta-intermediario.pdf")
+                .header("Content-Type", "application/pdf")
+                .body(pdfBytes);
+    }
+
+
+    @PostMapping("/gerar-pdf-completo")
+    public ResponseEntity<FormularioDietaCompleto> gerarPdf(@RequestBody FormularioDietaCompleto formularioDietaCompleto) {
+
+        FormularioDietaCompleto usuarioProcessado = geraPdfUserCase.gerarPdfCompleto(formularioDietaCompleto);
 
         return ResponseEntity.ok(usuarioProcessado);
     }

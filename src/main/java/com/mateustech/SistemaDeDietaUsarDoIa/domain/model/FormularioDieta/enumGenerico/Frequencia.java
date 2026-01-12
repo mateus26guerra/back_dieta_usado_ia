@@ -1,4 +1,4 @@
-package com.mateustech.SistemaDeDietaUsarDoIa.domain.model.enumGenerico;
+package com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.enumGenerico;
 
 public enum Frequencia {
     nunca,

@@ -2,7 +2,7 @@ package com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Pergu
 
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Perguntas.AtividadeFisica.AFenum.Intensidade;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Perguntas.AtividadeFisica.AFenum.Tipo_de_treino;
-import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.enumGenerico.SimNao;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.enumGenerico.SimNao;
 
 public class AtividadeFisica {
     private SimNao pratica_atividade_física;

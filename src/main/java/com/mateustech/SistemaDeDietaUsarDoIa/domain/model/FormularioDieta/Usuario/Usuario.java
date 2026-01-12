@@ -1,6 +1,6 @@
-package com.mateustech.SistemaDeDietaUsarDoIa.domain.model.Usuario;
+package com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Usuario;
 
-import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.Usuario.Uenum.Sexo;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Usuario.Uenum.Sexo;
 
 public class Usuario {
 

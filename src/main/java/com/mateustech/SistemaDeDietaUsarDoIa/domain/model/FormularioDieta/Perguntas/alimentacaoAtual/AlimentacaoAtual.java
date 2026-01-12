@@ -1,9 +1,9 @@
 package com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Perguntas.alimentacaoAtual;
 
-import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.enumGenerico.NivelTres;
-import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.enumGenerico.Qualidade;
-import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.enumGenerico.SimNao;
-import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.enumGenerico.Frequencia;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.enumGenerico.NivelTres;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.enumGenerico.Qualidade;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.enumGenerico.SimNao;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.enumGenerico.Frequencia;
 
 public class AlimentacaoAtual {
     private Qualidade Qualidade;
