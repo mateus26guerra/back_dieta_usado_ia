@@ -44,10 +44,15 @@ public class GeraPdfControlle {
 
 
     @PostMapping("/gerar-pdf-completo")
-    public ResponseEntity<FormularioDietaCompleto> gerarPdf(@RequestBody FormularioDietaCompleto formularioDietaCompleto) {
+    public ResponseEntity<byte[]> gerarPdf(
+            @RequestBody FormularioDietaCompleto formulario
+    ) {
+        byte[] pdf = geraPdfUserCase.gerarPdfCompleto(formulario);
 
-        FormularioDietaCompleto usuarioProcessado = geraPdfUserCase.gerarPdfCompleto(formularioDietaCompleto);
-
-        return ResponseEntity.ok(usuarioProcessado);
+        return ResponseEntity.ok()
+                .header("Content-Type", "application/pdf")
+                .header("Content-Disposition", "inline; filename=plano-completo.pdf")
+                .body(pdf);
     }
+
 }

@@ -1,14 +1,18 @@
 package com.mateustech.SistemaDeDietaUsarDoIa.domain.usecase.GeraPdfSimples;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mateustech.SistemaDeDietaUsarDoIa.adapter.out.pdf.PdfTemplate.PdfCompletoTemplate;
 import com.mateustech.SistemaDeDietaUsarDoIa.adapter.out.pdf.PdfTemplate.PdfMedioTemplate;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.contracts.IaGateway;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.contracts.PdfGateway;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.FormularioDietaCompleto;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.FormularioDietaMedio;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.FormularioDietaSimple;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.FormularioDieta.Usuario.Uenum.Sexo;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.IA.model.PlanoNivelCompletoIaResponse;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.IA.model.PlanoNivelMedioIaResponse;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.IA.model.PlanoNivelSimplesIaResponse;
+import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.IA.prompt.PromptNivelCompleto;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.IA.prompt.PromptNivelMedio;
 import com.mateustech.SistemaDeDietaUsarDoIa.domain.model.IA.prompt.PromptNivelSimples;
 import com.mateustech.SistemaDeDietaUsarDoIa.adapter.out.pdf.PdfTemplate.PdfSimplesTemplate;
@@ -92,14 +96,49 @@ public class GeraPdfUserCase {
 
 
 
-    public FormularioDietaCompleto gerarPdfCompleto(FormularioDietaCompleto FormularioDietaCompleto) {
+    public byte[] gerarPdfCompleto(FormularioDietaCompleto formulario) {
+        try {
+            String formularioJson = objectMapper.writeValueAsString(formulario);
 
-        // Aqui depois você vai:
-        // 1. chamar a IA
-        // 2. gerar o PDF
-        // 3. devolver o resultado
+            String prompt = PromptNivelCompleto.gerar(formularioJson);
 
-        // Por enquanto só devolve o usuário
-        return FormularioDietaCompleto;
+            String respostaIaJson = iaGateway.gerarPlanoJson(prompt);
+
+            PlanoNivelCompletoIaResponse iaResponse =
+                    objectMapper.readValue(respostaIaJson, PlanoNivelCompletoIaResponse.class);
+
+            String nomeUsuario = formulario.getUsuario() != null
+                    ? formulario.getUsuario().getPrimeiro_nome()
+                    : "Usuário";
+
+            double idade = formulario.getUsuario() != null
+                    ? formulario.getUsuario().getIdade()
+                    : 0;
+
+            Sexo sexo = formulario.getUsuario() != null
+                    ? formulario.getUsuario().getSexo():
+                    Sexo.Prefiro_nao_dizer;
+
+
+            double peso = formulario.getDadosFisicos().getPesoAtual();
+            double metaAguaLitros = peso * 0.05; // 50ml por kg
+
+            double metaAguaLitrosSemAtividadeFisica = peso * 0.035; // 50ml por kg
+
+            String html = PdfCompletoTemplate.gerarHtml(
+                    iaResponse,
+                    nomeUsuario,
+                    idade,
+                    sexo,
+                    metaAguaLitros,
+                    metaAguaLitrosSemAtividadeFisica
+            );
+
+            return pdfGateway.gerar(html);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao gerar PDF completo", e);
+        }
     }
+
 }
